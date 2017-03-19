@@ -45,16 +45,21 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
                 serverID: "256259539861504000",
                 userID: "279845556166197251"
               });
-
+              bot.sendMessage({ //Send another message
+                to : channelID,
+                message : "Kicked Jalen out of the server for being autistic"
+              });
+              logger.info("Kicked Jalen out of the server for being autistic");
           }
         }
-
     }
     else {
       bot.sendMessage({
         to : channelID,
         message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to digital cartoon girls."
       });
+      var date = new Date();
+      logger.info("Bot triggered at " + date.getDay() + "-" + date.getDate() + "-" +);
     }
 
 });
