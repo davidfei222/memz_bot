@@ -30,6 +30,7 @@ bot.on("ready", function (rawEvent) {
 
 //In this function we're going to add our commands.
 bot.on("message", function (user, userID, channelID, message, rawEvent) {
+    var date = new Date();
     if (userID == "279845556166197251" ) {
         /*var arguments = message.substring(1).split(" ");
         var command = arguments[0];
@@ -49,17 +50,22 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
                 to : channelID,
                 message : "Kicked Jalen out of the server for being autistic"
               });
-              logger.info("Kicked Jalen out of the server for being autistic");
+              logger.info("Kicked Jalen out of the server for being autistic at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
           }
         }
+    }
+    else if (userID == "285182845519921152") {
+      bot.sendMessage({
+        to : channelID,
+        message : "Welcome, master"
+      });
     }
     else {
       bot.sendMessage({
         to : channelID,
         message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to digital cartoon girls."
       });
-      var date = new Date();
-      logger.info("Bot triggered at " + date.getDay() + "-" + date.getDate() + "-" +);
+      logger.info("Bot triggered at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
     }
 
 });
