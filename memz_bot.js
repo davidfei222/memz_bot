@@ -2,9 +2,8 @@
 var logger = require("winston");
 var Discord = require("discord.io");
 var fs = require("fs");
-//The auth file is important as well!
-var auth = require("./auth.json");
 
+//Load the trigger phrases from the local JSON file
 var triggerPhrases;
 var jalen;
 var louis;
@@ -25,7 +24,7 @@ logger.level = 'debug';
 
 //Here we create our bot variable, this is what we're going to use to communicate to discord.
 var bot = new Discord.Client({
-    token: auth.token,
+    token: "MjkyNTMxOTA3MjEwNTEwMzM4.C688OA.rfzVVF7krlO7kOntKuX3udT49lg",
     autorun: true,
     messageCacheLimit: 100
 });
@@ -36,7 +35,7 @@ bot.on("ready", function (rawEvent) {
     logger.info(bot.username + " - (" + bot.id + ")");
 });
 
-//In this function we're going to add our commands.
+//In this function we're going to add our commands. This set of commands is triggered whenever a new message is sent to a channel.
 bot.on("message", function (user, userID, channelID, message, rawEvent) {
   console.log("Message detected.");
   var date = new Date();
@@ -56,7 +55,7 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
       if(err) throw err;
     });
     for(i = 0; i < jalen.length; i++) {
-      if (message == jalen[i] || message.includes(jalen[i])) {//If Jalen says something stupid, we'll do something!
+      if (message == jalen[i] || message.includes(jalen[i])) { //If Jalen says something stupid, we'll do something!
         bot.sendMessage({ //We're going to send him a message!
           to : channelID,
           message : "Shut the fuck up Jalen"
@@ -75,12 +74,12 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
   }
 
   if (userID == "285178566751158273" ) {
-    triggerPhrases.louisPhrases.push(message);
+    /*triggerPhrases.louisPhrases.push(message);
     fs.writeFile('triggers.json', JSON.stringify(triggerPhrases), function(err){
       if(err) throw err;
-    });
+    });*/
     for(i = 0; i < louis.length; i++) {
-      if (message == louis[i] || message.includes(louis[i])) {//If Louis says something stupid, we'll do something!
+      if (message == louis[i] || message.includes(louis[i])) { //If Louis says something stupid, we'll do something!
         bot.sendMessage({ //We're going to send him a message!
           to : channelID,
           message : "Shut the fuck up Louis"
@@ -91,18 +90,26 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
         });
         bot.sendMessage({ //Send another message
           to : channelID,
-          message : "Kicked Louis out of the server for being autistic"
+          message : "Kicked Louis out of the server for projecting"
         });
-        logger.info("Kicked Louis out of the server for being autistic at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+        logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
       }
     }
   }
 
-  if (userID == "285182845519921152" && message == "hi") {
-    bot.sendMessage({
-      to : channelID,
-      message : "Hello, master"
-    });
+  //Commands for me to modify the bot, only accessible by my main account
+  if (userID == "285182845519921152") {
+    if(message.includes("hi") || message.includes("hello")){
+      bot.sendMessage({
+        to : channelID,
+        message : "Hello, master"
+      });
+    }
+    else if(arguments[0] = "!changename"){
+      bot.editUserInfo({
+        username: arguments[1]
+      });
+    }
   }
 
   /*if (message != "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to digital cartoon girls."){
