@@ -5,10 +5,14 @@ var fs = require("fs");
 //The auth file is important as well!
 var auth = require("./auth.json");
 
-var triggerPhrases
+var triggerPhrases;
+var jalen;
+var louis;
 fs.readFile('triggers.json',function(err, content){
   if(err) throw err;
   triggerPhrases = JSON.parse(content);
+  jalen = triggerPhrases.jalenPhrases;
+  louis = triggerPhrases.louisPhrases;
   //console.log(triggerPhrases);
 });
 
@@ -47,12 +51,12 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
   //console.log(ownerID);
 
   if (userID == "279845556166197251") {
-    triggerPhrases.phrases.push(message);
+    triggerPhrases.jalenPhrases.push(message);
     fs.writeFile('triggers.json', JSON.stringify(triggerPhrases), function(err){
       if(err) throw err;
     });
-    for(i = 0; i < triggers.length; i++) {
-      if (message == triggerPhrases[i] || message.includes(triggerPhrases[i])) {//If Jalen says something stupid, we'll do something!
+    for(i = 0; i < jalen.length; i++) {
+      if (message == jalen[i] || message.includes(jalen[i])) {//If Jalen says something stupid, we'll do something!
         bot.sendMessage({ //We're going to send him a message!
           to : channelID,
           message : "Shut the fuck up Jalen"
@@ -71,12 +75,12 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
   }
 
   if (userID == "285178566751158273" ) {
-    triggerPhrases.phrases.push(message);
+    triggerPhrases.louisPhrases.push(message);
     fs.writeFile('triggers.json', JSON.stringify(triggerPhrases), function(err){
       if(err) throw err;
     });
-    for(i = 0; i < triggers.length; i++) {
-      if (message == triggersPhrases[i] || message.includes(triggerPhrases[i])) {//If Jalen says something stupid, we'll do something!
+    for(i = 0; i < louis.length; i++) {
+      if (message == louis[i] || message.includes(louis[i])) {//If Louis says something stupid, we'll do something!
         bot.sendMessage({ //We're going to send him a message!
           to : channelID,
           message : "Shut the fuck up Louis"
