@@ -33,24 +33,13 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
     var date = new Date();
     var arguments = message.split(" ");
     var channel = bot.channels[channelID];
+    var lastMessage = channel.last_message_id;
     var serverID = bot.channels[channelID].guild_id;
     var ownerID = bot.servers[serverID].owner_id;
     //uncomment to debug
+    //console.log(channel);
     //console.log(serverID);
     //console.log(ownerID);
-
-    if(message.includes("Fuck this bot") || message.includes("fuck this bot")){
-      var lastMessage = channel.last_message_id;
-      console.log(lastMessage);
-      bot.deleteMessage({
-        channelID: channelID,
-        messageID: lastMessage
-      });
-      bot.sendMessage({
-        to : channelID,
-        message : "Your message has been deleted for abusing the bot."
-      });
-    }
 
     if (userID == "279845556166197251" ) {
         for(i = 0; i < triggers.length; i++) {
