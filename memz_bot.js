@@ -3,7 +3,7 @@ var logger = require("winston");
 var Discord = require("discord.io");
 var triggers = ["do you think thats going to stop me? -_-",
                 "autistic",
-                "better"];
+                "better at league"];
 
 //Let's change some settings!
 logger.remove(logger.transports.Console);
@@ -31,11 +31,28 @@ bot.on("ready", function (rawEvent) {
 //In this function we're going to add our commands.
 bot.on("message", function (user, userID, channelID, message, rawEvent) {
     var date = new Date();
-    if (userID == "279845556166197251" ) {
-        /*var arguments = message.substring(1).split(" ");
-        var command = arguments[0];
-        arguments = arguments.splice(1);*/
+    var arguments = message.split(" ");
+    var channel = bot.channels[channelID];
+    var serverID = bot.channels[channelID].guild_id;
+    var ownerID = bot.servers[serverID].owner_id;
+    //uncomment to debug
+    //console.log(serverID);
+    //console.log(ownerID);
 
+    if(message.includes("Fuck this bot") || message.includes("fuck this bot")){
+      var lastMessage = channel.last_message_id;
+      console.log(lastMessage);
+      bot.deleteMessage({
+        channelID: channelID,
+        messageID: lastMessage
+      });
+      bot.sendMessage({
+        to : channelID,
+        message : "Your message has been deleted for abusing the bot."
+      });
+    }
+
+    if (userID == "279845556166197251" ) {
         for(i = 0; i < triggers.length; i++) {
           if (message == triggers[i]) {//If Jalen says something stupid, we'll do something!
               bot.sendMessage({ //We're going to send him a message!
@@ -43,7 +60,7 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
                 message : "Shut the fuck up Jalen"
               });
               bot.kick({ //Also kick his dumbass from the server
-                serverID: "256259539861504000",
+                serverID: serverID,
                 userID: "279845556166197251"
               });
               bot.sendMessage({ //Send another message
@@ -54,18 +71,20 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
           }
         }
     }
-    else if (userID == "285182845519921152") {
+
+    if (userID == "285182845519921152") {
       bot.sendMessage({
         to : channelID,
         message : "Welcome, master"
       });
     }
-    else {
+
+    /*if (message != "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to digital cartoon girls."){
       bot.sendMessage({
         to : channelID,
         message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to digital cartoon girls."
       });
       logger.info("Bot triggered at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
-    }
+    }*/
 
 });
