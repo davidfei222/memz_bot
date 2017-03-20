@@ -2,6 +2,11 @@
 var logger = require("winston");
 var Discord = require("discord.io");
 var triggers = ["do you think thats going to stop me? -_-",
+                "Do you think thats going to stop me? -_-",
+                "I'm eating boo boo ass spaghetti",
+                "I'll fucking stab you hoes",
+                "It would enter my nose",
+                "You want die? I give you half off die.",
                 "autistic",
                 "better at league"];
 
@@ -30,6 +35,7 @@ bot.on("ready", function (rawEvent) {
 
 //In this function we're going to add our commands.
 bot.on("message", function (user, userID, channelID, message, rawEvent) {
+    console.log("Message detected.");
     var date = new Date();
     var arguments = message.split(" ");
     var channel = bot.channels[channelID];
@@ -61,10 +67,10 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
         }
     }
 
-    if (userID == "285182845519921152") {
+    if (userID == "285182845519921152" && message == "hi") {
       bot.sendMessage({
         to : channelID,
-        message : "Welcome, master"
+        message : "Hello, master"
       });
     }
 
