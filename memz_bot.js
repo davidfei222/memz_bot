@@ -47,12 +47,12 @@ bot.on("ready", function (rawEvent) {
 });*/
 
 //In this function we're going to add our commands. This set of commands is triggered whenever a new message is sent to a channel.
-bot.on("message", function (user, userID, channelID, message, rawEvent) {
+bot.on("message", function (user, userID, channelID, message, event) {
   var date = new Date();
   console.log("Message detected at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
   var rawMsg = message.toLowerCase();
-  var arguments = rawMsg.split(" ");
-  //var lastMessage = channel.last_message_id;
+  var rawArgs = rawMsg.split(" ");
+  var arguments = message.split(" ");
 
   //Anti-war crime apologist measures
   if(rawMsg.includes("japan") && rawMsg.includes("not") && rawMsg.includes("nuke")) {
@@ -60,15 +60,6 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
       to : userID,
       message : "Japan deserved the nukes for their war crimes."
     });
-  }
-  else {
-    var channel = bot.channels[channelID];
-    var serverID = bot.channels[channelID].guild_id;
-    //var ownerID = bot.servers[serverID].owner_id;
-    //uncomment to debug
-    //console.log(channel);
-    //console.log(serverID);
-    //console.log(ownerID);
   }
 
   //Entered when Jalen messages the channel
@@ -87,7 +78,7 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
           message : "Shut the fuck up Jalen."
         });
         bot.kick({ //Also kick his dumbass from the server
-          serverID: serverID,
+          serverID: bot.channels[channelID].guild_id,
           userID: "279845556166197251"
         });
         bot.sendMessage({ //Send another message
@@ -106,6 +97,10 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
         if(err) throw err;
       });
     }
+    bot.sendMessage({ //Send him a direct message telling him to stop being a faggot
+      to : "279845556166197251",
+      message : "No autistic faggots allowed"
+    });
   }
 
   //Entered when Louis messages the channel
@@ -123,7 +118,7 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
           message : "Louis stop projecting."
         });
         bot.kick({ //Also kick his dumbass from the server
-          serverID: serverID,
+          serverID: bot.channels[channelID].guild_id,
           userID: "285178566751158273"
         });
         bot.sendMessage({ //Send another message
@@ -133,6 +128,10 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
         logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
       }
     }
+    bot.sendMessage({ //Send him a direct message with the definition of "projecting"
+      to : "285178566751158273",
+      message : "http://www.dictionary.com/browse/projecting"
+    });
   }
 
   //Commands for me to modify the bot, only usable by my main account
