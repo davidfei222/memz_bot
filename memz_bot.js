@@ -55,8 +55,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
   var arguments = message.split(" ");
 
   //Anti-war crime apologist measures
-  if(rawMsg.includes("japan") && rawMsg.includes("not") && rawMsg.includes("nuke")) {
-    bot.sendMessage({ //We're going to send him a message!
+  if(rawMsg.includes("japan") && rawMsg.includes("nothing") && rawMsg.includes("wrong")) {
+    bot.sendMessage({ 
       to : userID,
       message : "Japan deserved the nukes for their war crimes."
     });
@@ -136,7 +136,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 
   //Commands for me to modify the bot, only usable by my main account
   if (userID == "285182845519921152") {
-    if(rawMsg.includes("hi") || rawMsg.includes("hello")){
+    if(rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0){
       bot.sendMessage({
         to : channelID,
         message : "Hello, master"
