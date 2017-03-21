@@ -48,19 +48,32 @@ bot.on("ready", function (rawEvent) {
 
 //In this function we're going to add our commands. This set of commands is triggered whenever a new message is sent to a channel.
 bot.on("message", function (user, userID, channelID, message, rawEvent) {
-  console.log("Message detected.");
   var date = new Date();
-  var arguments = message.split(" ");
-  var channel = bot.channels[channelID];
-  var lastMessage = channel.last_message_id;
-  var serverID = bot.channels[channelID].guild_id;
-  var ownerID = bot.servers[serverID].owner_id;
-  //uncomment to debug
-  //console.log(channel);
-  //console.log(serverID);
-  //console.log(ownerID);
+  console.log("Message detected at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+  var rawMsg = message.toLowerCase();
+  var arguments = rawMsg.split(" ");
+  //var lastMessage = channel.last_message_id;
 
-  if (userID == "279845556166197251") { //Entered when Jalen messages the channel
+  //Anti-war crime apologist measures
+  if(rawMsg.includes("japan") && rawMsg.includes("not") && rawMsg.includes("nuke")) {
+    bot.sendMessage({ //We're going to send him a message!
+      to : userID,
+      message : "Japan deserved the nukes for their war crimes."
+    });
+  }
+  else {
+    var channel = bot.channels[channelID];
+    var serverID = bot.channels[channelID].guild_id;
+    //var ownerID = bot.servers[serverID].owner_id;
+    //uncomment to debug
+    //console.log(channel);
+    //console.log(serverID);
+    //console.log(ownerID);
+  }
+
+  //Entered when Jalen messages the channel
+  if (userID == "279845556166197251") {
+    var count = 0;
     fs.readFile('triggers.json',function(err, content){ //Read the most up to date list of trigger phrases
       if(err) throw err;
       triggerPhrases = JSON.parse(content);
@@ -68,10 +81,10 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
       //console.log(triggerPhrases);
     });
     for(i = 0; i < jalen.length; i++) {
-      if (message == jalen[i] || message.includes(jalen[i])) { //If Jalen says something stupid, we'll do something!
+      if (rawMsg.includes(jalen[i])) { //If Jalen says something stupid, we'll do something!
         bot.sendMessage({ //We're going to send him a message!
           to : channelID,
-          message : "Shut the fuck up Jalen"
+          message : "Shut the fuck up Jalen."
         });
         bot.kick({ //Also kick his dumbass from the server
           serverID: serverID,
@@ -79,20 +92,24 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
         });
         bot.sendMessage({ //Send another message
           to : channelID,
-          message : "Kicked Jalen out of the server for being autistic"
+          message : "Kicked Jalen out of the server for being autistic."
         });
         logger.info("Kicked Jalen out of the server for being autistic at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
       }
+      if(jalen[i].includes(rawMsg)){
+        count++;
+      }
     }
-    if(jalen.indexOf(message) < 0){ //Add the phrase he just said into the list for future reference
-      triggerPhrases.jalenPhrases.push(message);
+    if(count == 0){ //Add the phrase he just said into the list for future reference (if not already in the list)
+      triggerPhrases.jalenPhrases.push(rawMsg);
       fs.writeFile('triggers.json', JSON.stringify(triggerPhrases), function(err){
         if(err) throw err;
       });
     }
   }
 
-  if (userID == "285178566751158273") { //Entered when louis messages the channel
+  //Entered when Louis messages the channel
+  if (userID == "285178566751158273") {
     fs.readFile('triggers.json',function(err, content){ //Read the most up to date list of trigger phrases
       if(err) throw err;
       triggerPhrases = JSON.parse(content);
@@ -100,10 +117,10 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
       //console.log(triggerPhrases);
     });
     for(i = 0; i < louis.length; i++) {
-      if (message == louis[i] || message.includes(louis[i])) { //If Louis starts projecting, we'll do something!
+      if (rawMsg.includes(louis[i])) { //If Louis starts projecting, we'll do something!
         bot.sendMessage({ //We're going to send him a message!
           to : channelID,
-          message : "Shut the fuck up Louis"
+          message : "Louis stop projecting."
         });
         bot.kick({ //Also kick his dumbass from the server
           serverID: serverID,
@@ -111,22 +128,22 @@ bot.on("message", function (user, userID, channelID, message, rawEvent) {
         });
         bot.sendMessage({ //Send another message
           to : channelID,
-          message : "Kicked Louis out of the server for projecting"
+          message : "Kicked Louis out of the server for projecting."
         });
         logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
       }
     }
   }
 
-  //Commands for me to modify the bot, only accessible by my main account
+  //Commands for me to modify the bot, only usable by my main account
   if (userID == "285182845519921152") {
-    if(message.includes("hi") || message.includes("hello")){
+    if(rawMsg.includes("hi") || rawMsg.includes("hello")){
       bot.sendMessage({
         to : channelID,
         message : "Hello, master"
       });
     }
-    else if(arguments[0] = "!changename"){
+    else if(arguments[0] == "!changename"){
       bot.editUserInfo({
         username: arguments[1]
       });
