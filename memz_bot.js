@@ -28,7 +28,7 @@ bot.on("ready", function (event) {
   logger.info(bot.username + " - (" + bot.id + ")");
 });
 
-//Check if Jalen or Louis is online and reload the triggers JSON file accordingly
+//Check if Jalen or Louis is online and reload trigger.json accordingly
 /*bot.on("presence", function (user, userID, status, game, event) {
   console.log("Someone has logged in.");
   if((userID == "279845556166197251" || userID == "285178566751158273") && status == "online") {
@@ -59,17 +59,56 @@ bot.on("message", function (user, userID, channelID, message, event) {
   var arguments = message.split(" ");
 
   //Anti-war crime apologist measures
-  if(rawMsg.includes("japan") && rawMsg.includes("nothing") && rawMsg.includes("wrong")) {
+  if (rawMsg.includes("japan") && ((rawMsg.includes("nothing") && rawMsg.includes("wrong")) || rawMsg.includes("china"))) {
     bot.sendMessage({
       to : userID,
       message : "Japan deserved the nukes for their war crimes."
     });
   }
 
+  //Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
+  if (arguments[0] == "!add") {
+    fs.readFile('triggers.json', function(err, content){
+      if (err) throw err;
+      triggerPhrases = JSON.parse(content);
+      var phrase = "";
+      var arguments = message.split(" ");
+      if (arguments[1].toLowerCase() == "jalen") {
+        for(i = 2; i < arguments.length; i++){
+          if(i == arguments.length - 1){
+            phrase += arguments[i];
+          }
+          else{
+            phrase += arguments[i] + " ";
+          }
+        }
+        triggerPhrases.jalenPhrases.push(phrase);
+      }
+      else if (arguments[1].toLowerCase() == "louis") {
+        for(i = 2; i < arguments.length; i++){
+          if(i == arguments.length - 1){
+            phrase += arguments[i];
+          }
+          else{
+            phrase += arguments[i] + " ";
+          }
+        }
+        triggerPhrases.louisPhrases.push(phrase);
+      }
+      fs.writeFile('triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+        if(err) throw err;
+        bot.sendMessage({
+          to : channelID,
+          message : "Successfully added phrase"
+        });
+      });
+    });
+  }
+
   //Entered when Jalen messages the channel
   if (userID == "279845556166197251") {
     fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
-      if(err) throw err;
+      if (err) throw err;
       triggerPhrases = JSON.parse(content);
       jalen = triggerPhrases.jalenPhrases;
       for(i = 0; i < jalen.length; i++) {
