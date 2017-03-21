@@ -3,7 +3,7 @@ var logger = require("winston");
 var Discord = require("discord.io");
 var fs = require("fs");
 
-//Variables for loading the trigger phrases from the local JSON file
+//Variables for file I/O
 var triggerPhrases;
 var jalen;
 var louis;
@@ -56,7 +56,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 
   //Anti-war crime apologist measures
   if(rawMsg.includes("japan") && rawMsg.includes("nothing") && rawMsg.includes("wrong")) {
-    bot.sendMessage({ 
+    bot.sendMessage({
       to : userID,
       message : "Japan deserved the nukes for their war crimes."
     });
@@ -65,84 +65,83 @@ bot.on("message", function (user, userID, channelID, message, event) {
   //Entered when Jalen messages the channel
   if (userID == "279845556166197251") {
     var count = 0;
-    fs.readFile('triggers.json',function(err, content){ //Read the most up to date list of trigger phrases
+    fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
       if(err) throw err;
       triggerPhrases = JSON.parse(content);
       jalen = triggerPhrases.jalenPhrases;
-      //console.log(triggerPhrases);
-    });
-    for(i = 0; i < jalen.length; i++) {
-      if (rawMsg.includes(jalen[i])) { //If Jalen says something stupid, we'll do something!
-        bot.sendMessage({ //We're going to send him a message!
-          to : channelID,
-          message : "Shut the fuck up Jalen."
-        });
-        bot.kick({ //Also kick his dumbass from the server
-          serverID: bot.channels[channelID].guild_id,
-          userID: "279845556166197251"
-        });
-        bot.sendMessage({ //Send another message
-          to : channelID,
-          message : "Kicked Jalen out of the server for being autistic."
-        });
-        logger.info("Kicked Jalen out of the server for being autistic at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+      for(i = 0; i < jalen.length; i++) {
+        if (rawMsg.includes(jalen[i])) { //If Jalen says something stupid, we'll do something!
+          bot.sendMessage({ //We're going to send him a message!
+            to : channelID,
+            message : "Shut the fuck up Jalen."
+          });
+          bot.kick({ //Also kick his dumbass from the server
+            serverID: bot.channels[channelID].guild_id,
+            userID: "279845556166197251"
+          });
+          bot.sendMessage({ //Send another message
+            to : channelID,
+            message : "Kicked Jalen out of the server for being autistic."
+          });
+          logger.info("Kicked Jalen out of the server for being autistic at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+        }
+        if(jalen[i].includes(rawMsg)){
+          count++;
+        }
       }
-      if(jalen[i].includes(rawMsg)){
-        count++;
+      if(count == 0){ //Add the phrase he just said into the list for future reference (if not already in the list)
+        triggerPhrases.jalenPhrases.push(rawMsg);
+        fs.writeFile('triggers.json', JSON.stringify(triggerPhrases), function(err){
+          if(err) throw err;
+        });
       }
-    }
-    if(count == 0){ //Add the phrase he just said into the list for future reference (if not already in the list)
-      triggerPhrases.jalenPhrases.push(rawMsg);
-      fs.writeFile('triggers.json', JSON.stringify(triggerPhrases), function(err){
-        if(err) throw err;
+      bot.sendMessage({ //Send him a direct message telling him to stop being a faggot
+        to : "279845556166197251",
+        message : "No autistic faggots allowed"
       });
-    }
-    bot.sendMessage({ //Send him a direct message telling him to stop being a faggot
-      to : "279845556166197251",
-      message : "No autistic faggots allowed"
     });
+
   }
 
   //Entered when Louis messages the channel
   if (userID == "285178566751158273") {
-    fs.readFile('triggers.json',function(err, content){ //Read the most up to date list of trigger phrases
+    fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
       if(err) throw err;
       triggerPhrases = JSON.parse(content);
       louis = triggerPhrases.louisPhrases;
-      //console.log(triggerPhrases);
-    });
-    for(i = 0; i < louis.length; i++) {
-      if (rawMsg.includes(louis[i])) { //If Louis starts projecting, we'll do something!
-        bot.sendMessage({ //We're going to send him a message!
-          to : channelID,
-          message : "Louis stop projecting."
-        });
-        bot.kick({ //Also kick his dumbass from the server
-          serverID: bot.channels[channelID].guild_id,
-          userID: "285178566751158273"
-        });
-        bot.sendMessage({ //Send another message
-          to : channelID,
-          message : "Kicked Louis out of the server for projecting."
-        });
-        logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+      for(i = 0; i < louis.length; i++) {
+        if (rawMsg.includes(louis[i])) { //If Louis starts projecting, we'll do something!
+          bot.sendMessage({ //We're going to send him a message!
+            to : channelID,
+            message : "Louis stop projecting."
+          });
+          bot.kick({ //Also kick his dumbass from the server
+            serverID: bot.channels[channelID].guild_id,
+            userID: "285178566751158273"
+          });
+          bot.sendMessage({ //Send another message
+            to : channelID,
+            message : "Kicked Louis out of the server for projecting."
+          });
+          logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+        }
       }
-    }
-    bot.sendMessage({ //Send him a direct message with the definition of "projecting"
-      to : "285178566751158273",
-      message : "http://www.dictionary.com/browse/projecting"
+      bot.sendMessage({ //Send him a direct message with the definition of "projecting"
+        to : "285178566751158273",
+        message : "http://www.dictionary.com/browse/projecting"
+      });
     });
   }
 
   //Commands for me to modify the bot, only usable by my main account
   if (userID == "285182845519921152") {
-    if(rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0){
+    if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0) {
       bot.sendMessage({
         to : channelID,
         message : "Hello, master"
       });
     }
-    else if(arguments[0] == "!changename"){
+    else if (arguments[0] == "!changename") {
       bot.editUserInfo({
         username: arguments[1]
       });
@@ -151,6 +150,29 @@ bot.on("message", function (user, userID, channelID, message, event) {
         message : "A username change has been attempted for the bot. If the name change was unsuccessful, it is because Discord's name change cooldown is active."
       });
     }
+    else if (arguments[0] == "!list") {
+      fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+        if(err) throw err;
+        triggerPhrases = JSON.parse(content);
+        jalen = triggerPhrases.jalenPhrases;
+        for (i = 0; i < jalen.length; i++){
+          console.log(jalen[i]);
+        }
+        var serverID = bot.channels[channelID].guild_id;
+        bot.sendMessage({
+          to : channelID,
+          message : "Accessed list of triggers from this server: " + serverID
+        });
+      });
+    }
   }
 
 });
+
+//Function to be run when triggers.json is read
+/*var onRead = function(err, content){
+  if(err) throw err;
+  triggerPhrases = JSON.parse(content);
+  jalen = triggerPhrases.jalenPhrases;
+  louis = triggerPhrases.louisPhrases;
+}*/
