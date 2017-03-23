@@ -119,8 +119,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
                               message : "Shut the fuck up Jalen."
                          });
                          bot.kick({ //Also kick his dumbass from the server
-                              serverID: serverID,
-                              userID: "279845556166197251"
+                              serverID : serverID,
+                              userID : "279845556166197251"
                          });
                          bot.sendMessage({ //Send another message
                               to : channelID,
@@ -151,8 +151,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
                               message : "Louis stop projecting."
                          });
                          bot.kick({ //Also kick his dumbass from the server
-                              serverID: serverID,
-                              userID: "285178566751158273"
+                              serverID : serverID,
+                              userID : "285178566751158273"
                          });
                          bot.sendMessage({ //Send another message
                               to : channelID,
@@ -177,29 +177,29 @@ bot.on("message", function (user, userID, channelID, message, event) {
                     message : "Hello, master"
                });
           }
-     }
-     else if (arguments[0] == "!changename") {
-          bot.editUserInfo({
-               username: arguments[1]
-          });
-          bot.sendMessage({
-               to : channelID,
-               message : "A username change has been attempted for the bot. If the name change was unsuccessful, it is because Discord's name change cooldown is active."
-          });
-     }
-     else if (arguments[0] == "!list") {
-          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
-               if(err) throw err;
-               triggerPhrases = JSON.parse(content);
-               jalen = triggerPhrases.jalenPhrases;
-               for (i = 0; i < jalen.length; i++){
-                    console.log(jalen[i]);
-               }
-               var serverID = bot.channels[channelID].guild_id;
+          else if (arguments[0] == "!changename") {
+               bot.editUserInfo({
+                    username: arguments[1]
+               });
                bot.sendMessage({
                     to : channelID,
-                    message : "Accessed list of triggers from this server: " + serverID
+                    message : "A username change has been attempted for the bot. If the name change was unsuccessful, it is because Discord's name change cooldown is active."
                });
-          });
+          }
+          else if (arguments[0] == "!list") {
+               fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+                    if(err) throw err;
+                    triggerPhrases = JSON.parse(content);
+                    jalen = triggerPhrases.jalenPhrases;
+                    louis = triggerPhrases.louisPhrases;
+                    var serverID = bot.channels[channelID].guild_id;
+                    bot.sendMessage({
+                         to : channelID,
+                         message : "Accessed list of triggers from this server: " + serverID +
+                                   "\rJalen's triggers: " + jalen.toString() +
+                                   "\rLouis's triggers: " + louis.toString()
+                    });
+               });
+          }
      }
 });
