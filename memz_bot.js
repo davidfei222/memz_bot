@@ -154,9 +154,10 @@ bot.on("message", function (user, userID, channelID, message, event) {
                               serverID : serverID,
                               userID : "285178566751158273"
                          });
+                         triggerPhrases.projectionCount += 1;
                          bot.sendMessage({ //Send another message
                               to : channelID,
-                              message : "Kicked Louis out of the server for projecting."
+                              message : "Kicked Louis out of the server for projecting.\rThis is the " + triggerPhrases.projectionCount + "th time that Louis has projected."
                          });
                          logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
                          bot.sendMessage({ //Send him a direct message with the definition of "projecting"
@@ -166,18 +167,21 @@ bot.on("message", function (user, userID, channelID, message, event) {
                          break;
                     }
                }
+               fs.writeFile('triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+                    if(err) throw err;
+               });
           });
      }
 
      //Commands for my personal use. Modifies the bot and its behavior, only usable by my main account
      if (userID == "285182845519921152") {
-          if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0) {
+          if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0) { //Say hi to the bot to see if it's alive
                bot.sendMessage({
                     to : channelID,
                     message : "Hello, master"
                });
           }
-          else if (arguments[0] == "!changename" && arguments[1] != bot.username) {
+          else if (arguments[0] == "!changename" && arguments[1] != bot.username) { //Change the name of the bot
                bot.editUserInfo({
                     username: arguments[1]
                });
@@ -192,12 +196,14 @@ bot.on("message", function (user, userID, channelID, message, event) {
                     triggerPhrases = JSON.parse(content);
                     jalen = triggerPhrases.jalenPhrases;
                     louis = triggerPhrases.louisPhrases;
+                    count = triggerPhrases.projectionCount;
                     var serverID = bot.channels[channelID].guild_id;
                     bot.sendMessage({
                          to : channelID,
                          message : "Accessed list of triggers from this server: " + serverID +
                                    "\rJalen's triggers: " + jalen.toString() +
-                                   "\rLouis's triggers: " + louis.toString()
+                                   "\rLouis's triggers: " + louis.toString() +
+                                   "\rLouis has projected " + count.toString() + " times."
                     });
                });
           }
