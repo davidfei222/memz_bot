@@ -177,7 +177,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
                     message : "Hello, master"
                });
           }
-          else if (arguments[0] == "!changename") {
+          else if (arguments[0] == "!changename" && arguments[1] != bot.username) {
                bot.editUserInfo({
                     username: arguments[1]
                });
