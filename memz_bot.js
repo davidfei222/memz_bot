@@ -64,10 +64,29 @@ bot.on("message", function (user, userID, channelID, message, event) {
      var arguments = message.split(" ");
 
      //Anti-war crime apologist measures
-     if (rawMsg.includes("japan") && ((rawMsg.includes("nothing") && rawMsg.includes("wrong")) || rawMsg.includes("china"))) {
+     if (rawMsg.includes("japan") && (rawMsg.includes("nothing") || rawMsg.includes("wrong") || rawMsg.includes("china"))) {
           bot.sendMessage({
                to : userID,
                message : "Japan deserved the nukes for their war crimes."
+          });
+     }
+
+     //List information about the server the bot keeps track of
+     if (arguments[0] == "!list") {
+          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+               if(err) throw err;
+               triggerPhrases = JSON.parse(content);
+               jalen = triggerPhrases.jalenPhrases;
+               louis = triggerPhrases.louisPhrases;
+               count = triggerPhrases.projectionCount;
+               var serverID = bot.channels[channelID].guild_id;
+               bot.sendMessage({
+                    to : channelID,
+                    message : "Accessed list of triggers from this server: " + serverID +
+                              "\rJalen's triggers: " + jalen.toString() +
+                              "\rLouis's triggers: " + louis.toString() +
+                              "\rLouis has projected " + count.toString() + " times."
+               });
           });
      }
 
@@ -193,23 +212,6 @@ bot.on("message", function (user, userID, channelID, message, event) {
                bot.sendMessage({
                     to : channelID,
                     message : "A username change has been attempted for the bot. If the name change was unsuccessful, it is because Discord's name change cooldown is active."
-               });
-          }
-          else if (arguments[0] == "!list") {
-               fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
-                    if(err) throw err;
-                    triggerPhrases = JSON.parse(content);
-                    jalen = triggerPhrases.jalenPhrases;
-                    louis = triggerPhrases.louisPhrases;
-                    count = triggerPhrases.projectionCount;
-                    var serverID = bot.channels[channelID].guild_id;
-                    bot.sendMessage({
-                         to : channelID,
-                         message : "Accessed list of triggers from this server: " + serverID +
-                                   "\rJalen's triggers: " + jalen.toString() +
-                                   "\rLouis's triggers: " + louis.toString() +
-                                   "\rLouis has projected " + count.toString() + " times."
-                    });
                });
           }
      }
