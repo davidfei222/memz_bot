@@ -26,6 +26,11 @@ bot.on("ready", function (event) {
      logger.info("Connected!");
      logger.info("Logged in as: ");
      logger.info(bot.username + " - (" + bot.id + ")");
+     bot.setPresence({
+          game: {
+               name: "Nuke Japan A Third Time"
+          }
+     });
 });
 
 //Check if Jalen or Louis is online and reload trigger.json accordingly
