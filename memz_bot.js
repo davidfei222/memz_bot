@@ -100,10 +100,10 @@ bot.on("message", function (user, userID, channelID, message, event) {
                if (arguments[1].toLowerCase() == "jalen") {
                     for(i = 2; i < arguments.length; i++){
                          if(i == arguments.length - 1){
-                              phrase += arguments[i];
+                              phrase += arguments[i].toLowerCase();
                          }
                          else{
-                              phrase += arguments[i] + " ";
+                              phrase += arguments[i].toLowerCase() + " ";
                          }
                     }
                     triggerPhrases.jalenPhrases.push(phrase);
@@ -111,10 +111,10 @@ bot.on("message", function (user, userID, channelID, message, event) {
                else if (arguments[1].toLowerCase() == "louis") {
                     for(i = 2; i < arguments.length; i++){
                          if(i == arguments.length - 1){
-                              phrase += arguments[i];
+                              phrase += arguments[i].toLowerCase();
                          }
                          else{
-                              phrase += arguments[i] + " ";
+                              phrase += arguments[i].toLowerCase() + " ";
                          }
                     }
                     triggerPhrases.louisPhrases.push(phrase);
