@@ -28,7 +28,7 @@ bot.on("ready", function (event) {
      logger.info(bot.username + " - (" + bot.id + ")");
      bot.setPresence({
           game: {
-               name: "Nuke Japan A Third Time"
+               name: "wif muh dik"
           }
      });
 });
@@ -68,6 +68,14 @@ bot.on("message", function (user, userID, channelID, message, event) {
           bot.sendMessage({
                to : userID,
                message : "Japan deserved the nukes for their war crimes."
+          });
+     }
+
+     //Remind the server of Travis's degeneracy
+     if(userID == "294640905707585537"){
+          bot.sendMessage({
+               to : channelID,
+               message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to cartoon girls."
           });
      }
 
