@@ -28,7 +28,7 @@ bot.on("ready", function (event) {
      logger.info(bot.username + " - (" + bot.id + ")");
      bot.setPresence({
           game: {
-               name: "Nuke Japan A Third Time"
+               name: "wif muh dik"
           }
      });
 });
@@ -71,6 +71,14 @@ bot.on("message", function (user, userID, channelID, message, event) {
           });
      }
 
+     //Remind the server of Travis's degeneracy
+     if(userID == "294640905707585537"){
+          bot.sendMessage({
+               to : channelID,
+               message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to cartoon girls."
+          });
+     }
+
      //List information about the server the bot keeps track of
      if (arguments[0] == "!list") {
           fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
@@ -100,10 +108,10 @@ bot.on("message", function (user, userID, channelID, message, event) {
                if (arguments[1].toLowerCase() == "jalen") {
                     for(i = 2; i < arguments.length; i++){
                          if(i == arguments.length - 1){
-                              phrase += arguments[i];
+                              phrase += arguments[i].toLowerCase();
                          }
                          else{
-                              phrase += arguments[i] + " ";
+                              phrase += arguments[i].toLowerCase() + " ";
                          }
                     }
                     triggerPhrases.jalenPhrases.push(phrase);
@@ -111,10 +119,10 @@ bot.on("message", function (user, userID, channelID, message, event) {
                else if (arguments[1].toLowerCase() == "louis") {
                     for(i = 2; i < arguments.length; i++){
                          if(i == arguments.length - 1){
-                              phrase += arguments[i];
+                              phrase += arguments[i].toLowerCase();
                          }
                          else{
-                              phrase += arguments[i] + " ";
+                              phrase += arguments[i].toLowerCase() + " ";
                          }
                     }
                     triggerPhrases.louisPhrases.push(phrase);
