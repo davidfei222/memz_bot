@@ -2,10 +2,10 @@
 A bot for a friend's Discord server that stops the group from getting out of control.
 
 ## Instructions For Matt (so he doesn't have to keep asking me how to do things):
-1. If not already installed, install <a href="https://nodejs.org/en/">NodeJS</a>.  This a runtime environment that allows you to run JavaScript code.
-2. Get a GitHub account <a href="https://github.com/">here</a>.
-3. Install Git from <a href="https://git-scm.com/downloads">here</a>.  (The first 3 steps only need to be done once.)
-4. Go the repository for the bot <a href="https://github.com/davidfei222/memz_bot">here</a> and click "Clone or download", then copy the link they give you.
+1. If not already installed, install <a href="https://nodejs.org/en/", target="_blank">NodeJS</a>.  This a runtime environment that allows you to run JavaScript code.
+2. Get a GitHub account <a href="https://github.com/", target="_blank">here</a>.
+3. Install Git from <a href="https://git-scm.com/downloads", target="_blank">here</a>.  (The first 3 steps only need to be done once.)
+4. Go the repository for the bot <a href="https://github.com/davidfei222/memz_bot", target="_blank">here</a> and click "Clone or download", then copy the link they give you.
 5. Go the Windows search bar (the Cortana bar) and type in "cmd" without the quotes.  Click on the first result.
 6. Now that you have Windows command line open, type in "git clone {the url you just copied}" without the braces.  This will create a local copy of the repository in your user folder.
 7. Navigate to that folder. Type in "dir" to see all the folders in your user folder and find the folder that has the same name as the repository (all the names will be in the rightmost column).  Navigate there by typing in "cd {name of the folder}" without the braces.
