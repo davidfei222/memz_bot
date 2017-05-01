@@ -67,7 +67,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
      if (rawMsg.includes("japan") && (rawMsg.includes("nothing") || rawMsg.includes("wrong") || rawMsg.includes("china"))) {
           bot.sendMessage({
                to : userID,
-               message : "Japan deserved the nukes for their war crimes."
+               message : "Japan deserved the nukes for their war crimes.",
+               tts : true
           });
      }
 
@@ -180,7 +181,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
                          var serverID = bot.channels[channelID].guild_id;
                          bot.sendMessage({ //We're going to send him a message!
                               to : channelID,
-                              message : "Louis stop projecting."
+                              message : "Louis stop projecting.",
+                              tts : true
                          });
                          bot.kick({ //Also kick his dumbass from the server
                               serverID : serverID,
@@ -189,12 +191,14 @@ bot.on("message", function (user, userID, channelID, message, event) {
                          triggerPhrases.projectionCount += 1;
                          bot.sendMessage({ //Send another message
                               to : channelID,
-                              message : "Kicked Louis out of the server for projecting.\rThis is the " + triggerPhrases.projectionCount + "th time that Louis has projected."
+                              message : "Kicked Louis out of the server for projecting.\rThis is the " + triggerPhrases.projectionCount + "th time that Louis has projected.",
+                              tts : true
                          });
                          logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
                          bot.sendMessage({ //Send him a direct message with the definition of "projecting"
                               to : "285178566751158273",
-                              message : "http://www.dictionary.com/browse/projecting"
+                              message : "http://www.dictionary.com/browse/projecting",
+                              tts : true
                          });
                          break;
                     }
@@ -210,7 +214,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
           if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0) { //Say hi to the bot to see if it's alive
                bot.sendMessage({
                     to : channelID,
-                    message : "Hello, master"
+                    message : "Louis is a cuck",
+                    tts : true
                });
           }
           else if (arguments[0] == "!changename" && arguments[1] != bot.username) { //Change the name of the bot
