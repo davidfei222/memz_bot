@@ -72,13 +72,18 @@ bot.on("message", function (user, userID, channelID, message, event) {
                triggerPhrases = JSON.parse(content);
                triggerPhrases.wallHeight += 10;
                height = triggerPhrases.wallHeight;
+			var tts_bool = false;
+			if (height == 1000 || height == 10000 || height == 100000)
+			{
+				tts_bool = true;
+			}
                var serverID = bot.channels[channelID].guild_id;
                bot.sendMessage({
                     to : channelID,
                     message : "THE WALL JUST GOT 10 FEET HIGHER!" +
                               "\rWE ARE NOW AT " + height + " FEET OF ANTI-MEXICAN FORTIFICATION." +
                               "\rMAKE AMERICA GREAT AGAIN!",
-                    tts : true
+                    tts : tts_bool
                });
                fs.writeFile('triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
                     if(err) throw err;
