@@ -58,13 +58,37 @@ bot.on("message", function (user, userID, channelID, message, event) {
      var rawMsg = message.toLowerCase();
      var rawArgs = rawMsg.split(" ");
      var rawNoSpaces = "";
-     for (i = 0; i < rawArgs.length; i++){
+     for (i = 0; i < rawArgs.length; i++)
+     {
           rawNoSpaces += rawArgs[i];
      }
      var arguments = message.split(" ");
 
+     //wall building measures
+     if (rawMsg.includes("10") && rawMsg.includes("feet") && rawMsg.includes("higher") && userID != "292531907210510338")
+     {
+          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+               if(err) throw err;
+               triggerPhrases = JSON.parse(content);
+               triggerPhrases.wallHeight += 10;
+               height = triggerPhrases.wallHeight;
+               var serverID = bot.channels[channelID].guild_id;
+               bot.sendMessage({
+                    to : channelID,
+                    message : "THE WALL JUST GOT 10 FEET HIGHER!" +
+                              "\rWE ARE NOW AT " + height + " FEET OF ANTI-MEXICAN FORTIFICATION." +
+                              "\rMAKE AMERICA GREAT AGAIN!",
+                    tts : true
+               });
+               fs.writeFile('triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+                    if(err) throw err;
+               });
+          });
+     }
+
      //Anti-war crime apologist measures
-     if (rawMsg.includes("japan") && (rawMsg.includes("nothing") || rawMsg.includes("wrong") || rawMsg.includes("china"))) {
+     if (rawMsg.includes("japan") && (rawMsg.includes("nothing") || rawMsg.includes("wrong") || rawMsg.includes("china")))
+     {
           bot.sendMessage({
                to : userID,
                message : "Japan deserved the nukes for their war crimes.",
@@ -73,7 +97,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //Remind the server of Travis's degeneracy
-     if(userID == "294640905707585537"){
+     if(userID == "294640905707585537")
+     {
           bot.sendMessage({
                to : channelID,
                message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to cartoon girls."
@@ -81,7 +106,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //List information about the server the bot keeps track of
-     if (arguments[0] == "!list") {
+     if (arguments[0] == "!list")
+     {
           fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if(err) throw err;
                triggerPhrases = JSON.parse(content);
@@ -100,29 +126,38 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
-     if (arguments[0] == "!add") {
+     if (arguments[0] == "!add")
+     {
           fs.readFile('triggers.json', function(err, content){
                if (err) throw err;
                triggerPhrases = JSON.parse(content);
                var phrase = "";
                var arguments = message.split(" ");
-               if (arguments[1].toLowerCase() == "jalen") {
-                    for(i = 2; i < arguments.length; i++){
-                         if(i == arguments.length - 1){
+               if (arguments[1].toLowerCase() == "jalen")
+               {
+                    for(i = 2; i < arguments.length; i++)
+                    {
+                         if(i == arguments.length - 1)
+                         {
                               phrase += arguments[i].toLowerCase();
                          }
-                         else{
+                         else
+                         {
                               phrase += arguments[i].toLowerCase() + " ";
                          }
                     }
                     triggerPhrases.jalenPhrases.push(phrase);
                }
-               else if (arguments[1].toLowerCase() == "louis") {
-                    for(i = 2; i < arguments.length; i++){
-                         if(i == arguments.length - 1){
+               else if (arguments[1].toLowerCase() == "louis")
+               {
+                    for(i = 2; i < arguments.length; i++)
+                    {
+                         if(i == arguments.length - 1)
+                         {
                               phrase += arguments[i].toLowerCase();
                          }
-                         else{
+                         else
+                         {
                               phrase += arguments[i].toLowerCase() + " ";
                          }
                     }
@@ -139,13 +174,16 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //Entered when Jalen messages the channel
-     if (userID == "279845556166197251") {
+     if (userID == "279845556166197251")
+     {
           fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if (err) throw err;
                triggerPhrases = JSON.parse(content);
                jalen = triggerPhrases.jalenPhrases;
-               for(i = 0; i < jalen.length; i++) {
-                    if (rawMsg.includes(jalen[i])) { //If Jalen says something stupid, we'll do something!
+               for(i = 0; i < jalen.length; i++)
+               {
+                    if (rawMsg.includes(jalen[i]))
+                    { //If Jalen says something stupid, we'll do something!
                          var serverID = bot.channels[channelID].guild_id;
                          bot.sendMessage({ //We're going to send him a message!
                               to : channelID,
@@ -171,13 +209,16 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //Entered when Louis messages the channel
-     if (userID == "285178566751158273") {
+     if (userID == "285178566751158273")
+     {
           fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if(err) throw err;
                triggerPhrases = JSON.parse(content);
                louis = triggerPhrases.louisPhrases;
-               for(i = 0; i < louis.length; i++) {
-                    if (rawNoSpaces.includes(louis[i])) { //If Louis starts projecting, we'll do something!
+               for(i = 0; i < louis.length; i++)
+               {
+                    if (rawNoSpaces.includes(louis[i]))
+                    { //If Louis starts projecting, we'll do something!
                          var serverID = bot.channels[channelID].guild_id;
                          bot.sendMessage({ //We're going to send him a message!
                               to : channelID,
@@ -210,15 +251,18 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //Commands for my personal use. Modifies the bot and its behavior, only usable by my main account
-     if (userID == "285182845519921152") {
-          if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0) { //Say hi to the bot to see if it's alive
+     if (userID == "285182845519921152")
+     {
+          if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0)
+          { //Say hi to the bot to see if it's alive
                bot.sendMessage({
                     to : channelID,
                     message : "Louis is a cuck",
                     tts : true
                });
           }
-          else if (arguments[0] == "!changename" && arguments[1] != bot.username) { //Change the name of the bot
+          else if (arguments[0] == "!changename" && arguments[1] != bot.username)
+          { //Change the name of the bot
                bot.editUserInfo({
                     username: arguments[1]
                });
