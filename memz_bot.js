@@ -65,7 +65,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      var arguments = message.split(" ");
 
      //wall building measures
-     if (rawMsg.includes("10") && rawMsg.includes("feet") && rawMsg.includes("higher") && userID != "292531907210510338")
+     if (rawMsg.indexOf("10") >= 0 && rawMsg.indexOf("feet") >= 0 && rawMsg.indexOf("higher") >= 0 && userID != "292531907210510338")
      {
           fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if(err) throw err;
@@ -92,7 +92,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      }
 
      //Anti-war crime apologist measures
-     if (rawMsg.includes("japan") && (rawMsg.includes("nothing") || rawMsg.includes("wrong") || rawMsg.includes("china")))
+     if (rawMsg.indexOf("japan") >= 0 && (rawMsg.indexOf("nothing") >= 0 || rawMsg.indexOf("wrong") >= 0 || rawMsg.indexOf("china") >= 0))
      {
           bot.sendMessage({
                to : userID,
@@ -187,7 +187,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
                jalen = triggerPhrases.jalenPhrases;
                for(i = 0; i < jalen.length; i++)
                {
-                    if (rawMsg.includes(jalen[i]))
+                    if (rawMsg.indexOf(jalen[i]) >= 0)
                     { //If Jalen says something stupid, we'll do something!
                          var serverID = bot.channels[channelID].guild_id;
                          bot.sendMessage({ //We're going to send him a message!
@@ -222,7 +222,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
                louis = triggerPhrases.louisPhrases;
                for(i = 0; i < louis.length; i++)
                {
-                    if (rawNoSpaces.includes(louis[i]))
+                    if (rawNoSpaces.indexOf(louis[i]) >= 0)
                     { //If Louis starts projecting, we'll do something!
                          var serverID = bot.channels[channelID].guild_id;
                          bot.sendMessage({ //We're going to send him a message!
