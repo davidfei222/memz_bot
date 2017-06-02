@@ -67,7 +67,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      //wall building measures
      if (rawMsg.indexOf("10") >= 0 && rawMsg.indexOf("feet") >= 0 && rawMsg.indexOf("higher") >= 0 && userID != "292531907210510338")
      {
-          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+          fs.readFile('/home/pi/memz_bot/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if(err) throw err;
                triggerPhrases = JSON.parse(content);
                triggerPhrases.wallHeight += 10;
@@ -85,7 +85,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
                               "\rMAKE AMERICA GREAT AGAIN!",
                     tts : tts_bool
                });
-               fs.writeFile('triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+               fs.writeFile('/home/pi/memz_bot/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
                     if(err) throw err;
                });
           });
@@ -113,7 +113,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      //List information about the server the bot keeps track of
      if (arguments[0] == "!list")
      {
-          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+          fs.readFile('/home/pi/memz_bot/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if(err) throw err;
                triggerPhrases = JSON.parse(content);
                jalen = triggerPhrases.jalenPhrases;
@@ -133,7 +133,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      //Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
      if (arguments[0] == "!add")
      {
-          fs.readFile('triggers.json', function(err, content){
+          fs.readFile('/home/pi/memz_bot/triggers.json', function(err, content){
                if (err) throw err;
                triggerPhrases = JSON.parse(content);
                var phrase = "";
@@ -168,7 +168,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
                     }
                     triggerPhrases.louisPhrases.push(phrase);
                }
-               fs.writeFile('triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+               fs.writeFile('/home/pi/memz_bot/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
                     if(err) throw err;
                     bot.sendMessage({
                          to : channelID,
@@ -181,7 +181,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      //Entered when Jalen messages the channel
      if (userID == "279845556166197251")
      {
-          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+          fs.readFile('/home/pi/memz_bot/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if (err) throw err;
                triggerPhrases = JSON.parse(content);
                jalen = triggerPhrases.jalenPhrases;
@@ -216,7 +216,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
      //Entered when Louis messages the channel
      if (userID == "285178566751158273")
      {
-          fs.readFile('triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+          fs.readFile('/home/pi/memz_bot/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
                if(err) throw err;
                triggerPhrases = JSON.parse(content);
                louis = triggerPhrases.louisPhrases;
