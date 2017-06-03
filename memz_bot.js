@@ -62,7 +62,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	{
 		rawNoSpaces += rawArgs[i];
 	}
-	var arguments = message.split(" ");
+	var words = message.split(" ");
 
 	//wall building measures
 	if (rawMsg.indexOf("10") >= 0 && rawMsg.indexOf("feet") >= 0 && rawMsg.indexOf("higher") >= 0 && userID != "292531907210510338")
@@ -117,7 +117,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	}
 
 	//List information about the server the bot keeps track of
-	if (arguments[0] == "!list")
+	if (words[0] == "!list")
 	{
 		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
 			if(err) throw err;
@@ -137,39 +137,39 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	}
 
 	//Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
-	if (arguments[0] == "!add")
+	if (words[0] == "!add")
 	{
 		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){
 			if (err) throw err;
 			triggerPhrases = JSON.parse(content);
 			var phrase = "";
-			var arguments = message.split(" ");
-			if (arguments[1].toLowerCase() == "jalen")
+			var words = message.split(" ");
+			if (words[1].toLowerCase() == "jalen")
 			{
-				for(i = 2; i < arguments.length; i++)
+				for(i = 2; i < words.length; i++)
 				{
-					if(i == arguments.length - 1)
+					if(i == words.length - 1)
 					{
-						phrase += arguments[i].toLowerCase();
+						phrase += words[i].toLowerCase();
 					}
 					else
 					{
-						phrase += arguments[i].toLowerCase() + " ";
+						phrase += words[i].toLowerCase() + " ";
 					}
 				}
 				triggerPhrases.jalenPhrases.push(phrase);
 			}
-			else if (arguments[1].toLowerCase() == "louis")
+			else if (words[1].toLowerCase() == "louis")
 			{
-				for(i = 2; i < arguments.length; i++)
+				for(i = 2; i < words.length; i++)
 				{
-					if(i == arguments.length - 1)
+					if(i == words.length - 1)
 					{
-						phrase += arguments[i].toLowerCase();
+						phrase += words[i].toLowerCase();
 					}
 					else
 					{
-						phrase += arguments[i].toLowerCase() + " ";
+						phrase += words[i].toLowerCase() + " ";
 					}
 				}
 				triggerPhrases.louisPhrases.push(phrase);
@@ -272,10 +272,10 @@ bot.on("message", function (user, userID, channelID, message, event) {
 				tts : true
 			});
 		}
-		else if (arguments[0] == "!changename" && arguments[1] != bot.username)
+		else if (words[0] == "!changename" && words[1] != bot.username)
 		{ //Change the name of the bot
 			bot.editUserInfo({
-				username: arguments[1]
+				username: words[1]
 			});
 			bot.sendMessage({
 				to : channelID,
