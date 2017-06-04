@@ -88,9 +88,9 @@ bot.on("message", function (user, userID, channelID, message, event) {
 				message : "THE WALL JUST GOT 10 FEET HIGHER!" +
 						"\rWe now have " + height + " feet of American greatness keeping the illegals out." +
 						"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
-						"\rMAKE AMERICA GREAT AGAIN!",,
+						"\rMAKE AMERICA GREAT AGAIN!",
 				tts : tts_bool
-			})
+			});
 			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
 				if(err) throw err;
 			});
