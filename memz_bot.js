@@ -93,7 +93,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 			}, function (error, response) {
 				bot.uploadFile({
 					to : channelID,
-					file : "/home/pi/memz_bot/10_feet_higher.gif"
+					file : "/home/pi/memz_bot/10_feet_higher.gif",
 					filename: "10_feet_higher.gif"
 				});
 			});
