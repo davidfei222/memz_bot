@@ -88,14 +88,9 @@ bot.on("message", function (user, userID, channelID, message, event) {
 				message : "THE WALL JUST GOT 10 FEET HIGHER!" +
 						"\rWe now have " + height + " feet of American greatness keeping the illegals out." +
 						"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
-						"\rMAKE AMERICA GREAT AGAIN!",
+						"\rMAKE AMERICA GREAT AGAIN!" +
+						"\rhttp://i.imgur.com/imISYhY.gifv",
 				tts : tts_bool
-			}, function (error, response) {
-				bot.uploadFile({
-					to : channelID,
-					file : "/home/pi/memz_bot/10_feet_higher.gif",
-					filename: "10_feet_higher.gif"
-				});
 			});
 			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
 				if(err) throw err;
