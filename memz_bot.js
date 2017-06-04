@@ -67,7 +67,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	//wall building measures
 	if (rawMsg.indexOf("10") >= 0 && rawMsg.indexOf("feet") >= 0 && rawMsg.indexOf("higher") >= 0 && userID != "292531907210510338")
 	{
-		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 			if(err) throw err;
 			triggerPhrases = JSON.parse(content);
 			triggerPhrases.wallHeight += 10;
@@ -90,8 +90,14 @@ bot.on("message", function (user, userID, channelID, message, event) {
 						"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
 						"\rMAKE AMERICA GREAT AGAIN!",
 				tts : tts_bool
+			} function (error, response) {
+				bot.uploadFile({
+					to : channelID,
+					file : "/home/pi/memz_bot/10_feet_higher.gif"
+					filename: "10_feet_higher.gif"
+				});
 			});
-			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
 				if(err) throw err;
 			});
 		});
@@ -119,7 +125,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	//List information about the server the bot keeps track of
 	if (words[0] == "!list")
 	{
-		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 			if(err) throw err;
 			triggerPhrases = JSON.parse(content);
 			jalen = triggerPhrases.jalenPhrases;
@@ -139,7 +145,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	//Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
 	if (words[0] == "!add")
 	{
-		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){
+		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {
 			if (err) throw err;
 			triggerPhrases = JSON.parse(content);
 			var phrase = "";
@@ -174,7 +180,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 				}
 				triggerPhrases.louisPhrases.push(phrase);
 			}
-			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
 				if(err) throw err;
 				bot.sendMessage({
 					to : channelID,
@@ -187,7 +193,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	//Entered when Jalen messages the channel
 	if (userID == "279845556166197251")
 	{
-		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 			if (err) throw err;
 			triggerPhrases = JSON.parse(content);
 			jalen = triggerPhrases.jalenPhrases;
@@ -222,7 +228,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 	//Entered when Louis messages the channel
 	if (userID == "285178566751158273")
 	{
-		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content){ //Read the most up to date list of trigger phrases
+		fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 			if(err) throw err;
 			triggerPhrases = JSON.parse(content);
 			louis = triggerPhrases.louisPhrases;
@@ -255,7 +261,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 					break;
 				}
 			}
-			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err){
+			fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
 				if(err) throw err;
 			});
 		});
