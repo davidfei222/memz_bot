@@ -90,7 +90,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 						"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
 						"\rMAKE AMERICA GREAT AGAIN!",
 				tts : tts_bool
-			} function (error, response) {
+			}, function (error, response) {
 				bot.uploadFile({
 					to : channelID,
 					file : "/home/pi/memz_bot/10_feet_higher.gif"
