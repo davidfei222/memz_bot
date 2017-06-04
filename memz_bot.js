@@ -1,11 +1,7 @@
-//First of all, we need to load the dependencies we downloaded!
+//Load dependencies
 var logger = require("winston");
 var Discord = require("discord.io");
 var fs = require("fs");
-
-//Variables for startup (security measures)
-//var token
-//var bot
 
 //Let's change some settings!
 logger.remove(logger.transports.Console);
@@ -14,7 +10,8 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
-fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {//Read the token and create bot
+//Read the token and create bot
+fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {
 	if (err) throw err;
 	triggers = JSON.parse(content);
 	startup(triggers.token);
@@ -54,7 +51,7 @@ function startup(token)
 		}
 		var words = message.split(" ");
 
-		//wall building measures
+		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
 		if (rawMsg.indexOf("10") >= 0 && rawMsg.indexOf("feet") >= 0 && rawMsg.indexOf("higher") >= 0 && userID != "292531907210510338")
 		{
 			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
