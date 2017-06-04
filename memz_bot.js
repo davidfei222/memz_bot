@@ -1,3 +1,5 @@
+//This bot is for general fuckery within my friend's Discord server.
+
 //Load dependencies
 var logger = require("winston");
 var Discord = require("discord.io");
