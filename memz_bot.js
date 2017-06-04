@@ -84,7 +84,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 				rmdr = 30000 - height;
 			}
 			bot.sendMessage({
-				to : channeID,
+				to : channelID,
 				message : "THE WALL JUST GOT 10 FEET HIGHER!" +
 						"\rWe now have " + height + " feet of American greatness keeping the illegals out." +
 						"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
