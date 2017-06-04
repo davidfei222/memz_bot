@@ -17,6 +17,8 @@ fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) 
 	startup(triggers.token);
 });
 
+//In this function we create the bot and define commands for it.
+//This function gets called as part of the callback for reading the JSON data file.
 function startup(token) 
 {
 	//Here we create our bot variable, this is what we're going to use to communicate to discord.
