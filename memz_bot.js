@@ -276,10 +276,7 @@ function startup(token)
 	});
 }
 
-// Would have been nice to have, but exceeded the character limit
-/*bot.sendMessage({
-	to : channelID,
-	message : "__________    __       __    _________ " +
+	/*message : "__________    __       __    _________ " +
 			"\r|____  ____|  |  |     |  |  |  _______|" +
 			"\r    |  |      |  |     |  |  |  |       " +
 			"\r    |  |      |  |_____|  |  |  |______ " +
@@ -319,8 +316,3 @@ function startup(token)
 			"\r|  |     |  |  |  |  |  |_____| |  |  |     |  |  |  |______   |  |\\  \\       __ " +
 			"\r|__|     |__|  |__|  |__________|  |__|     |__|  |_________|  |__| \\__\\     |__|" +
 			"\r" +
-			"\rWe now have " + height + " feet of American greatness keeping the illegals out." +
-			"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
-			"\rMAKE AMERICA GREAT AGAIN!",
-	tts : tts_bool
-});*/
