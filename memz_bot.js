@@ -3,10 +3,9 @@ var logger = require("winston");
 var Discord = require("discord.io");
 var fs = require("fs");
 
-//Variables for file I/O
-var triggerPhrases;
-var jalen;
-var louis;
+//Variables for startup (security measures)
+//var token
+//var bot
 
 //Let's change some settings!
 logger.remove(logger.transports.Console);
@@ -15,9 +14,15 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
+/*bot = fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {//Read the token and create bot
+	if (err) throw err;
+	startup = JSON.parse(content);
+	
+}*/
+
 //Here we create our bot variable, this is what we're going to use to communicate to discord.
 var bot = new Discord.Client({
-	token: "MjkyNTMxOTA3MjEwNTEwMzM4.C688OA.rfzVVF7krlO7kOntKuX3udT49lg",
+	token: "MjkyNTMxOTA3MjEwNTEwMzM4.DBVMug.VbS0sV4KJNTrjJXDUUxnbFUUnxQ",
 	autorun: true,
 	messageCacheLimit: 100
 });
@@ -28,7 +33,7 @@ bot.on("ready", function (event) {
 	logger.info(bot.username + " - (" + bot.id + ")");
 	bot.setPresence({
 		game: {
-			name: "wif muh dik"
+			name: "with Vladimir Putin"
 		}
 	});
 });
