@@ -85,8 +85,8 @@ bot.on("message", function (user, userID, channelID, message, event) {
 			}
 			bot.sendMessage({
 				to : channelID,
-				message :    "__________    __       __    _________ " +
-						"\r|____  ____|  |  |     |  |  |  _______|" + 
+				message : "__________    __       __    _________ " +
+						"\r|____  ____|  |  |     |  |  |  _______|" +
 						"\r    |  |      |  |     |  |  |  |       " +
 						"\r    |  |      |  |_____|  |  |  |______ " +
 						"\r    |  |      |   _____   |  |   ______|" +
@@ -135,7 +135,7 @@ bot.on("message", function (user, userID, channelID, message, event) {
 			});
 		});
 	}
-	
+
 	//Anti-war crime apologist measures
 	if (rawMsg.indexOf("japan") >= 0 && (rawMsg.indexOf("nothing") >= 0 || rawMsg.indexOf("wrong") >= 0 || rawMsg.indexOf("china") >= 0))
 	{
@@ -323,7 +323,3 @@ bot.on("message", function (user, userID, channelID, message, event) {
 		}
 	}
 });
-
-
-
-
