@@ -21,7 +21,7 @@ fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) 
 
 //In this function we create the bot and define commands for it.
 //This function gets called as part of the callback for reading the JSON data file.
-function startup(token) 
+function startup(token)
 {
 	//Here we create our bot variable, this is what we're going to use to communicate to discord.
 	var bot = new Discord.Client({
@@ -89,19 +89,22 @@ function startup(token)
 			});
 		}
 
-		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338" && userID != "285182845519921152")
+		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338")
 		{
 			var serverID = bot.channels[channelID].guild_id;
-			bot.kick({
-				serverID : serverID,
-				userID : userID
-			});
+			if (userID != "285182845519921152")
+			{
+				bot.kick({
+					serverID : serverID,
+					userID : userID
+				});
+			}
 			bot.sendMessage({
 				to : channelID,
 				message : "User " + userID + "just mentioned the FAKE NEWS liberal media outlet CNN! SAD!",
 				tts : true
 			});
-		}	
+		}
 
 		//Anti-war crime apologist measures
 		if (rawMsg.indexOf("japan") >= 0 && (rawMsg.indexOf("nothing") >= 0 || rawMsg.indexOf("wrong") >= 0 || rawMsg.indexOf("china") >= 0))
