@@ -56,7 +56,7 @@ function startup(token)
 		var words = message.split(" ");
 
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
-		if (rawMsg.indexOf("10") >= 0 && rawMsg.indexOf("feet") >= 0 && rawMsg.indexOf("higher") >= 0 && userID != "292531907210510338")
+		if (rawNoSpaces.indexOf("10") >= 0 && rawNoSpaces.indexOf("feet") >= 0 && rawNoSpaces.indexOf("higher") >= 0 && userID != "292531907210510338")
 		{
 			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 				if(err) throw err;
@@ -88,6 +88,20 @@ function startup(token)
 				});
 			});
 		}
+
+		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338" && userID != "285182845519921152")
+		{
+			var serverID = bot.channels[channelID].guild_id;
+			bot.kick({
+				serverID : serverID,
+				userID : userID
+			});
+			bot.sendMessage({
+				to : channelID,
+				message : "User " + userID + "just mentioned the FAKE NEWS liberal media outlet CNN! SAD!",
+				tts : true
+			});
+		}	
 
 		//Anti-war crime apologist measures
 		if (rawMsg.indexOf("japan") >= 0 && (rawMsg.indexOf("nothing") >= 0 || rawMsg.indexOf("wrong") >= 0 || rawMsg.indexOf("china") >= 0))
