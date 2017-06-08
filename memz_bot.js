@@ -102,7 +102,7 @@ function startup(token)
 			}
 			bot.sendMessage({
 				to : channelID,
-				message : "CNN is FAKE NEWS! User " + user + " is an America-hating liberal! Sad!",
+				message : "CNN is FAKE NEWS!  User " + user + " is an America-hating liberal!  Sad!",
 				tts : true
 			});
 		}
