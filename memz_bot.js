@@ -88,7 +88,8 @@ function startup(token)
 				});
 			});
 		}
-
+		
+		//Chastise people for bringing up fake news
 		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338")
 		{
 			var serverID = bot.channels[channelID].guild_id;
@@ -101,7 +102,7 @@ function startup(token)
 			}
 			bot.sendMessage({
 				to : channelID,
-				message : "User " + userID + "just mentioned the FAKE NEWS liberal media outlet CNN! SAD!",
+				message : "CNN is FAKE NEWS! User " + user + " is an America-hating liberal! Sad!",
 				tts : true
 			});
 		}
