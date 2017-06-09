@@ -58,11 +58,11 @@ function startup(token)
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
 		if (rawNoSpaces.indexOf("10") >= 0 && rawNoSpaces.indexOf("feet") >= 0 && rawNoSpaces.indexOf("higher") >= 0 && userID != "292531907210510338")
 		{
-			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
+			fs.readFile('/home/pi/Documents/bot_data/wallheight.txt', function(err, content) { //Read the most up to date list of trigger phrases
 				if(err) throw err;
-				triggerPhrases = JSON.parse(content);
-				triggerPhrases.wallHeight += 10;
-				height = triggerPhrases.wallHeight;
+				//triggerPhrases = JSON.parse(content);
+				//triggerPhrases.wallHeight += 10;
+				height = parseInt(content, 10);
 				var tts_bool = false;
 				if (height == 1000 || height == 10000 || height == 100000)
 				{
@@ -83,7 +83,7 @@ function startup(token)
 							"\rhttp://i.imgur.com/imISYhY.gifv",
 					tts : tts_bool
 				});
-				fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
+				fs.writeFile('/home/pi/Documents/bot_data/wallheight.txt', height, function(err) {
 					if(err) throw err;
 				});
 			});
