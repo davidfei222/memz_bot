@@ -63,6 +63,7 @@ function startup(token)
 				//triggerPhrases = JSON.parse(content);
 				//triggerPhrases.wallHeight += 10;
 				height = parseInt(content, 10);
+				height += 10;
 				var tts_bool = false;
 				if (height == 1000 || height == 10000 || height == 100000)
 				{
