@@ -41,6 +41,18 @@ function startup(token)
 		});
 	});
 
+	//Send a big black dick to Louis if he's online
+	bot.on("presence", function(user, userID, status, game, event) {
+		if (userID == "285178566751158273"  && status == "online")
+		{
+			var loop = setInterval(function() {
+				bot.sendMessage({
+					to : userID,
+					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
+				});
+			}, 2000);
+		}
+	});
 
 	//In this function we're going to add our commands. This set of commands is triggered whenever a new message is sent to a channel.
 	bot.on("message", function (user, userID, channelID, message, event) {
@@ -89,7 +101,7 @@ function startup(token)
 				});
 			});
 		}
-		
+
 		//Chastise people for bringing up fake news
 		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338")
 		{
