@@ -41,19 +41,6 @@ function startup(token)
 		});
 	});
 
-	//Send a big black dick to Louis if he's online
-	bot.on("presence", function(user, userID, status, game, event) {
-		if (userID == "285178566751158273"  && status == "online")
-		{
-			var loop = setInterval(function() {
-				bot.sendMessage({
-					to : userID,
-					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
-				});
-			}, 2000);
-		}
-	});
-
 	//In this function we're going to add our commands. This set of commands is triggered whenever a new message is sent to a channel.
 	bot.on("message", function (user, userID, channelID, message, event) {
 		var date = new Date();
@@ -66,6 +53,16 @@ function startup(token)
 			rawNoSpaces += rawArgs[i];
 		}
 		var words = message.split(" ");
+
+		//Bot will spam Louis with a picture of a black dick
+		if (rawMsg == "attack_louis") {
+			var loop = setInterval(function() {
+				bot.sendMessage({
+					to : "285178566751158273",
+					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
+				});
+			}, 2000);
+		}
 
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
 		if (rawNoSpaces.indexOf("10") >= 0 && rawNoSpaces.indexOf("feet") >= 0 && rawNoSpaces.indexOf("higher") >= 0 && userID != "292531907210510338")
