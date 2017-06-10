@@ -57,12 +57,12 @@ function startup(token)
 		//Bot will spam Louis with a picture of a black dick
 		if (rawMsg == "attack_louis") {
 			console.log("Spamming Louis...");
-			var loop = setInterval(function() {
+			while(true) {
 				bot.sendMessage({
 					to : "285178566751158273",
 					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 				});
-			}, 2000);
+			}
 		}
 
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
