@@ -62,7 +62,7 @@ function startup(token)
 					to : "279845556166197251", 
 					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 				});
-			}, 2000);
+			}, 3000);
 		}
 
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
