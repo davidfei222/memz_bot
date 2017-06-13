@@ -59,7 +59,7 @@ function startup(token)
 			console.log("Spamming Louis...");
 			lock = setInterval(function () {
 				bot.sendMessage({
-					to : "279845556166197251", 
+					to : "295037047008133122", 
 					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 				});
 			}, 3000);
