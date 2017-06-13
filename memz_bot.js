@@ -72,7 +72,7 @@ function startup(token)
 				}, function(error, response) {
 					setTimeout(function () {console.log("Waiting...");}, 1000);
 				});*/
-			setInterval(function () {
+			lock = setInterval(function () {
 				bot.sendMessage({
 					to : "285182845519921152", //"285178566751158273", 
 					message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
@@ -300,6 +300,10 @@ function startup(token)
 		//Commands for my personal use. Modifies the bot and its behavior, only usable by my main account
 		if (userID == "285182845519921152")
 		{
+			if (rawMsg == "stop_spam")
+			{
+				clearInterval(lock);
+			}
 			if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0)
 			{ //Say hi to the bot to see if it's alive
 				bot.sendMessage({
