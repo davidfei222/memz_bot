@@ -59,8 +59,8 @@ function startup(token)
 			console.log("Spamming Louis...");
 			lock = setInterval(function () {
 				bot.sendMessage({
-					to : "285182845519921152", //"285178566751158273", 
-					message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
+					to : "285178566751158273", 
+					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 				});
 			}, 2000);
 		}
@@ -288,6 +288,7 @@ function startup(token)
 			if (rawMsg == "stop_spam")
 			{
 				clearInterval(lock);
+				console.log("Stopped spamming Louis");
 			}
 			if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0)
 			{ //Say hi to the bot to see if it's alive
