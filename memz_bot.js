@@ -63,7 +63,7 @@ function startup(token)
 						to : "285182845519921152", //"285178566751158273", 
 						message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 					});
-				}, 1000);
+				}, 5000);
 			}
 		}
 
