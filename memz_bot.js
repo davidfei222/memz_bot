@@ -57,7 +57,7 @@ function startup(token)
 		//Bot will spam Louis with a picture of a black dick
 		if (rawMsg == "attack_louis") {
 			console.log("Spamming Louis...");
-			for(var i = 0; i < 10; i++) {
+			/*for(var i = 0; i < 10; i++) {
 				setTimeout(function () {
 					bot.sendMessage({
 						to : "285182845519921152", //"285178566751158273", 
@@ -66,13 +66,18 @@ function startup(token)
 						setTimeout(function () {console.log("Waiting...");}, 4000);
 					});
 				}, 4000);
-				/*bot.sendMessage({
+				bot.sendMessage({
 					to : "285182845519921152", //"285178566751158273", 
 					message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 				}, function(error, response) {
 					setTimeout(function () {console.log("Waiting...");}, 1000);
 				});*/
-			}
+			setInterval(function () {
+				bot.sendMessage({
+					to : "285182845519921152", //"285178566751158273", 
+					message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
+				});
+			}, 3000);
 		}
 
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
