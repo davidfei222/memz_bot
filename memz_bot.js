@@ -135,6 +135,10 @@ function startup(token)
 				message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to cartoon girls."
 			});
 		}
+		
+		//////////////////////////////
+		// antiautismbot.js methods //
+		////////////////////////////// 
 
 		//List information about the server the bot keeps track of
 		if (words[0] == "!list")
@@ -146,129 +150,23 @@ function startup(token)
 		if (words[0] == "!add")
 		{
 			antiAutismBot.addTriggers(bot, channelID, message);
-			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {
-				if (err) throw err;
-				triggerPhrases = JSON.parse(content);
-				var phrase = "";
-				var words = message.split(" ");
-				if (words[1].toLowerCase() == "jalen")
-				{
-					for(i = 2; i < words.length; i++)
-					{
-						if(i == words.length - 1)
-						{
-							phrase += words[i].toLowerCase();
-						}
-						else
-						{
-							phrase += words[i].toLowerCase() + " ";
-						}
-					}
-					triggerPhrases.jalenPhrases.push(phrase);
-				}
-				else if (words[1].toLowerCase() == "louis")
-				{
-					for(i = 2; i < words.length; i++)
-					{
-						if(i == words.length - 1)
-						{
-							phrase += words[i].toLowerCase();
-						}
-						else
-						{
-							phrase += words[i].toLowerCase() + " ";
-						}
-					}
-					triggerPhrases.louisPhrases.push(phrase);
-				}
-				fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
-					if(err) throw err;
-					bot.sendMessage({
-						to : channelID,
-						message : "Successfully added phrase"
-					});
-				});
-			});*/
 		}
 
 		//Entered when Jalen messages the channel
 		if (userID == "279845556166197251")
 		{
 			antiAutismBot.removeJalen(bot, rawMsg, channelID, date);
-			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
-				if (err) throw err;
-				triggerPhrases = JSON.parse(content);
-				jalen = triggerPhrases.jalenPhrases;
-				for(i = 0; i < jalen.length; i++)
-				{
-					if (rawMsg.indexOf(jalen[i]) >= 0)
-					{ //If Jalen says something stupid, we'll do something!
-						var serverID = bot.channels[channelID].guild_id;
-						bot.sendMessage({ //We're going to send him a message!
-							to : channelID,
-							message : "Shut the fuck up Jalen."
-						});
-						bot.kick({ //Also kick his dumbass from the server
-							serverID : serverID,
-							userID : "279845556166197251"
-						});
-						bot.sendMessage({ //Send another message
-							to : channelID,
-							message : "Kicked Jalen out of the server for being autistic."
-						});
-						logger.info("Kicked Jalen out of the server for being autistic at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
-						bot.sendMessage({ //Send him a direct message telling him to stop being a faggot
-							to : "279845556166197251",
-							message : "No autistic faggots allowed"
-						});
-						break;
-					}
-				}
-			});*/
 		}
 
 		//Entered when Louis messages the channel
 		if (userID == "285178566751158273")
 		{
 			antiAutismBot.removeLouis(bot, rawNoSpaces, channelID, date);
-			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
-				if(err) throw err;
-				triggerPhrases = JSON.parse(content);
-				louis = triggerPhrases.louisPhrases;
-				for(i = 0; i < louis.length; i++)
-				{
-					if (rawNoSpaces.indexOf(louis[i]) >= 0)
-					{ //If Louis starts projecting, we'll do something!
-						var serverID = bot.channels[channelID].guild_id;
-						bot.sendMessage({ //We're going to send him a message!
-							to : channelID,
-							message : "Louis stop projecting.",
-							tts : true
-						});
-						bot.kick({ //Also kick his dumbass from the server
-							serverID : serverID,
-							userID : "285178566751158273"
-						});
-						triggerPhrases.projectionCount += 1;
-						bot.sendMessage({ //Send another message
-							to : channelID,
-							message : "Kicked Louis out of the server for projecting.\rThis is the " + triggerPhrases.projectionCount + "th time that Louis has projected.",
-							tts : true
-						});
-						logger.info("Kicked Louis out of the server for projecting at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
-						bot.sendMessage({ //Send him a direct message with the definition of "projecting"
-							to : "285178566751158273",
-							message : "http://www.dictionary.com/browse/projecting",
-							tts : true
-						});
-						break;
-					}
-				}
-				fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
-					if(err) throw err;
-				});
-			});*/
 		}
+		
+		//////////////////////////////////
+		// End antiautismbot.js methods //
+		//////////////////////////////////
 
 		//Commands for my personal use. Modifies the bot and its behavior, only usable by my main account
 		if (userID == "285182845519921152")
