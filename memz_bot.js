@@ -67,59 +67,6 @@ function startup(token)
 			}, 3000);
 		}
 
-		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
-		if (rawNoSpaces.indexOf("10") >= 0 && rawNoSpaces.indexOf("feet") >= 0 && rawNoSpaces.indexOf("higher") >= 0 && userID != "292531907210510338")
-		{
-			trumpBot.buildWall(bot, channelID);
-			/*fs.readFile('/home/pi/Documents/bot_data/wallheight.txt', function(err, content) { //Read the most up to date list of trigger phrases
-				if(err) throw err;
-				height = parseInt(content, 10);
-				height += 10;
-				var tts_bool = false;
-				if (height == 1000 || height == 10000 || height == 100000)
-				{
-					tts_bool = true;
-				}
-				var serverID = bot.channels[channelID].guild_id;
-				var rmdr = 0;
-				if (30000 - height > 0)
-				{
-					rmdr = 30000 - height;
-				}
-				bot.sendMessage({
-					to : channelID,
-					message : "THE WALL JUST GOT 10 FEET HIGHER!" +
-							"\rWe now have " + height + " feet of American greatness keeping the illegals out." +
-							"\rOnly " + rmdr + " feet to go until the wall becomes taller than Hillary's emails!" +
-							"\rMAKE AMERICA GREAT AGAIN!" +
-							"\rhttp://i.imgur.com/imISYhY.gifv",
-					tts : tts_bool
-				});
-				fs.writeFile('/home/pi/Documents/bot_data/wallheight.txt', height, function(err) {
-					if(err) throw err;
-				});
-			});*/
-		}
-
-		//Chastise people for bringing up fake news
-		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338")
-		{
-			trumpBot.cnn(bot, channelID, userID);
-			/*var serverID = bot.channels[channelID].guild_id;
-			if (userID != "285182845519921152")
-			{
-				bot.kick({
-					serverID : serverID,
-					userID : userID
-				});
-			}
-			bot.sendMessage({
-				to : channelID,
-				message : "CNN is FAKE NEWS!  User " + user + " is an America-hating liberal!  Sad!",
-				tts : true
-			});*/
-		}
-
 		//Anti-war crime apologist measures
 		if (rawMsg.indexOf("japan") >= 0 && (rawMsg.indexOf("nothing") >= 0 || rawMsg.indexOf("wrong") >= 0 || rawMsg.indexOf("china") >= 0))
 		{
@@ -138,6 +85,26 @@ function startup(token)
 				message : "Any viewpoint expressed by Travis Vetter is automatically negated by the fact that he gets off to cartoon girls."
 			});
 		}
+		
+		/////////////////////////
+		// trumpbot.js methods //
+		/////////////////////////
+
+		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
+		if (rawNoSpaces.indexOf("10") >= 0 && rawNoSpaces.indexOf("feet") >= 0 && rawNoSpaces.indexOf("higher") >= 0 && userID != "292531907210510338")
+		{
+			trumpBot.buildWall(bot, channelID);
+		}
+
+		//Chastise people for bringing up fake news
+		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338")
+		{
+			trumpBot.cnn(bot, channelID, userID, user);
+		}
+
+		/////////////////////////////
+		// End trumpbot.js methods //
+		/////////////////////////////
 		
 		//////////////////////////////
 		// antiautismbot.js methods //

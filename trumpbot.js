@@ -34,7 +34,7 @@ exports.buildWall = function(bot, channelID)
 	});
 };
 
-exports.cnn = function(bot, channelID, userID)
+exports.cnn = function(bot, channelID, userID, user)
 {
 	var serverID = bot.channels[channelID].guild_id;
 	if (userID != "285182845519921152")
