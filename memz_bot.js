@@ -5,6 +5,7 @@ var logger = require("winston");
 var Discord = require("discord.io");
 var fs = require("fs");
 var antiAutismBot = require("./antiautismbot.js");
+var trumpBot = require("./trumpbot.js");
 
 //Let's change some settings!
 logger.remove(logger.transports.Console);
@@ -69,7 +70,8 @@ function startup(token)
 		//Respond with a funny message and GIF if anyone mentions "10 feet higher"
 		if (rawNoSpaces.indexOf("10") >= 0 && rawNoSpaces.indexOf("feet") >= 0 && rawNoSpaces.indexOf("higher") >= 0 && userID != "292531907210510338")
 		{
-			fs.readFile('/home/pi/Documents/bot_data/wallheight.txt', function(err, content) { //Read the most up to date list of trigger phrases
+			trumpBot.buildWall(bot, channelID);
+			/*fs.readFile('/home/pi/Documents/bot_data/wallheight.txt', function(err, content) { //Read the most up to date list of trigger phrases
 				if(err) throw err;
 				height = parseInt(content, 10);
 				height += 10;
@@ -96,13 +98,14 @@ function startup(token)
 				fs.writeFile('/home/pi/Documents/bot_data/wallheight.txt', height, function(err) {
 					if(err) throw err;
 				});
-			});
+			});*/
 		}
 
 		//Chastise people for bringing up fake news
 		if (rawNoSpaces.indexOf("cnn") >= 0 && userID != "292531907210510338")
 		{
-			var serverID = bot.channels[channelID].guild_id;
+			trumpBot.cnn(bot, channelID, userID);
+			/*var serverID = bot.channels[channelID].guild_id;
 			if (userID != "285182845519921152")
 			{
 				bot.kick({
@@ -114,7 +117,7 @@ function startup(token)
 				to : channelID,
 				message : "CNN is FAKE NEWS!  User " + user + " is an America-hating liberal!  Sad!",
 				tts : true
-			});
+			});*/
 		}
 
 		//Anti-war crime apologist measures

@@ -1,3 +1,5 @@
+// This module contains some functions for the bot to help modularize the code a bit
+
 var fs = require("fs");
 var logger = require("winston");
 
