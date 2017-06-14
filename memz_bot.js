@@ -4,6 +4,7 @@
 var logger = require("winston");
 var Discord = require("discord.io");
 var fs = require("fs");
+var antiAutismBot = require("./antiautismbot.js");
 
 //Let's change some settings!
 logger.remove(logger.transports.Console);
@@ -70,8 +71,6 @@ function startup(token)
 		{
 			fs.readFile('/home/pi/Documents/bot_data/wallheight.txt', function(err, content) { //Read the most up to date list of trigger phrases
 				if(err) throw err;
-				//triggerPhrases = JSON.parse(content);
-				//triggerPhrases.wallHeight += 10;
 				height = parseInt(content, 10);
 				height += 10;
 				var tts_bool = false;
@@ -140,7 +139,8 @@ function startup(token)
 		//List information about the server the bot keeps track of
 		if (words[0] == "!list")
 		{
-			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
+			antiAutismBot.list(bot, channelID);
+			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 				if(err) throw err;
 				triggerPhrases = JSON.parse(content);
 				jalen = triggerPhrases.jalenPhrases;
@@ -154,7 +154,7 @@ function startup(token)
 							"\rLouis's triggers: " + louis.toString() +
 							"\rLouis has projected " + count.toString() + " times."
 				});
-			});
+			});*/
 		}
 
 		//Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
