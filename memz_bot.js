@@ -140,27 +140,13 @@ function startup(token)
 		if (words[0] == "!list")
 		{
 			antiAutismBot.list(bot, channelID);
-			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
-				if(err) throw err;
-				triggerPhrases = JSON.parse(content);
-				jalen = triggerPhrases.jalenPhrases;
-				louis = triggerPhrases.louisPhrases;
-				count = triggerPhrases.projectionCount;
-				var serverID = bot.channels[channelID].guild_id;
-				bot.sendMessage({
-					to : channelID,
-					message : "Accessed list of triggers from this server: " + serverID +
-							"\rJalen's triggers: " + jalen.toString() +
-							"\rLouis's triggers: " + louis.toString() +
-							"\rLouis has projected " + count.toString() + " times."
-				});
-			});*/
 		}
 
 		//Command to add more triggers to the list (!add {name of offender} {phrase they uttered})
 		if (words[0] == "!add")
 		{
-			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {
+			antiAutismBot.addTriggers(bot, channelID, message);
+			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) {
 				if (err) throw err;
 				triggerPhrases = JSON.parse(content);
 				var phrase = "";
@@ -202,13 +188,14 @@ function startup(token)
 						message : "Successfully added phrase"
 					});
 				});
-			});
+			});*/
 		}
 
 		//Entered when Jalen messages the channel
 		if (userID == "279845556166197251")
 		{
-			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
+			antiAutismBot.removeJalen(bot, rawMsg, channelID, date);
+			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 				if (err) throw err;
 				triggerPhrases = JSON.parse(content);
 				jalen = triggerPhrases.jalenPhrases;
@@ -237,13 +224,14 @@ function startup(token)
 						break;
 					}
 				}
-			});
+			});*/
 		}
 
 		//Entered when Louis messages the channel
 		if (userID == "285178566751158273")
 		{
-			fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
+			antiAutismBot.removeLouis(bot, rawNoSpaces, channelID, date);
+			/*fs.readFile('/home/pi/Documents/bot_data/triggers.json', function(err, content) { //Read the most up to date list of trigger phrases
 				if(err) throw err;
 				triggerPhrases = JSON.parse(content);
 				louis = triggerPhrases.louisPhrases;
@@ -279,7 +267,7 @@ function startup(token)
 				fs.writeFile('/home/pi/Documents/bot_data/triggers.json', JSON.stringify(triggerPhrases, null, " "), function(err) {
 					if(err) throw err;
 				});
-			});
+			});*/
 		}
 
 		//Commands for my personal use. Modifies the bot and its behavior, only usable by my main account
