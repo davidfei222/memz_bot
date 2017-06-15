@@ -66,8 +66,8 @@ function startup(token)
 				console.log("Spamming Louis...");
 				lock = setInterval(function () {
 					bot.sendMessage({
-						to : "285182845519921152", //"285178566751158273", 
-						message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
+						to : "285178566751158273", 
+						message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
 					});
 				}, 2000);
 			}
@@ -147,11 +147,6 @@ function startup(token)
 		//Commands for my personal use. Modifies the bot and its behavior, only usable by my main account
 		if (userID == "285182845519921152")
 		{
-			if (rawMsg == "stop_spam")
-			{
-				clearInterval(lock);
-				console.log("Stopped spamming Louis");
-			}
 			if (rawArgs.indexOf("hi") >= 0 || rawArgs.indexOf("hello") >= 0)
 			{ //Say hi to the bot to see if it's alive
 				bot.sendMessage({
@@ -169,6 +164,17 @@ function startup(token)
 					to : channelID,
 					message : "A username change has been attempted for the bot. If the name change was unsuccessful, it is because Discord's name change cooldown is active."
 				});
+			}
+		}
+
+		//Privileged access commands: Only me and and whoever I choose to allow can use these commands.
+		if (userID == "285182845519921152" ||	//me
+		    userID == "223613996119359499" )	//matt
+		{
+			if (rawMsg == "stop_spam")
+			{ //Stop the bot from spamming Louis
+				clearInterval(lock);
+				console.log("Stopped spamming Louis");
 			}
 		}
 	});
