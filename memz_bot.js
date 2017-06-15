@@ -7,6 +7,9 @@ var fs = require("fs");
 var antiAutismBot = require("./antiautismbot.js");
 var trumpBot = require("./trumpbot.js");
 
+//Lock for spam feature
+var lock;
+
 //Let's change some settings!
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -59,12 +62,15 @@ function startup(token)
 		//Bot will spam Louis with a picture of a black dick
 		if (rawMsg == "attack_louis") {
 			console.log("Spamming Louis...");
-			lock = setInterval(function () {
-				bot.sendMessage({
-					to : "285178566751158273", 
-					message : "https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
-				});
-			}, 3000);
+			if (lock === undefined)
+			{
+				lock = setInterval(function () {
+					bot.sendMessage({
+						to : "285182845519921152" //"285178566751158273", 
+						message : "lambo" //"https://cdn.discordapp.com/attachments/232467376665264128/278646568037384193/42.jpg"
+					});
+				}, 3000);
+			}
 		}
 
 		//Anti-war crime apologist measures
