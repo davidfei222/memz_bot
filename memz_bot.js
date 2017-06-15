@@ -61,9 +61,9 @@ function startup(token)
 
 		//Bot will spam Louis with a picture of a black dick
 		if (rawMsg == "attack_louis") {
-			console.log("Spamming Louis...");
 			if (lock === undefined)
 			{
+				console.log("Spamming Louis...");
 				lock = setInterval(function () {
 					bot.sendMessage({
 						to : "285182845519921152", //"285178566751158273", 
