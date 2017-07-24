@@ -36,7 +36,8 @@ function startup(token)
 	});
 
 	bot.on("ready", function (event) {
-		logger.info("Connected!");
+		var date = new Date();
+		logger.info("Connected at " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
 		logger.info("Logged in as: ");
 		logger.info(bot.username + " - (" + bot.id + ")");
 		bot.setPresence({
