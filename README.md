@@ -1,3 +1,3 @@
 # memz_bot
-A bot for general fuckery within a friend's Discord server.
+A bot for that does stupid things in a friend's Discord server.
 
